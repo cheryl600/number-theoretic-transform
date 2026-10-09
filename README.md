@@ -24,3 +24,10 @@ Floating-point FFT gives approximate convolution; for integer sequences whose tr
 - `ntt(a)` — forward transform, returns a list of residues mod 998244353.
 - `intt(a)` — inverse transform of a residue list.
 - `ntt_convolve(a, b)` — cyclic convolution of two integer sequences, zero-padded to the next power of two >= len(a)+len(b)-1 so the cyclic and linear convolutions coincide.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
